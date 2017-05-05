@@ -226,4 +226,17 @@
 			console.log('<div id="'+(i+1)+'">'+vector+'//["\'`-->]]>]</div>');
     	}
     }
+  /**
+   * Export all vectors for brute-force XSS Tests
+   */
+  window.vectorsAsString = function(){
+    var xss = '';
+    for(i in items){
+      i = parseInt(i, 10);
+      var vector = items[i].data;
+      vector = vector.replace(/(?:alert|write)\(1\)/gim, 'alert('+(i+1)+')');
+      xss += '<div id="'+(i+1)+'">'+vector+'//["\'`-->]]>]</div>' + "\n\n";
+    }
+    return xss;
+  }
 })();
